@@ -161,7 +161,7 @@ public class HomeFrame extends JFrame {
         try {
             //System.out.println(getHikesFrame().getHikeInfo());
             //System.out.println(Arrays.toString(getHikesFrame().getHikeCoordinates()));
-            System.out.println(getHikesFrame().getHikeCoordinates());
+            System.out.println(getHikesFrame().getHikePosition());
         } catch (Exception e) {
             //Logger.getLogger(HomeFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -5,10 +5,13 @@
  */
 package com.hikingapp.view;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLConnection;
+import java.io.InputStreamReader;
 import java.net.URL;
+import org.json.JSONObject;
+import org.json.JSONException;
+
 /**
  *
  * @author alex
@@ -32,15 +35,40 @@ public class HikesFrame extends javax.swing.JFrame {
         initComponents();
     }
 
-    public String getHikeInfo() throws IOException {
-        URLConnection connection = new URL("https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200955643-5409210a90c1c5739821d1efae87d2bb").openConnection();
-//        connection.setRequestProperty("header1", header1);
-//        connection.setRequestProperty("header2", header2);
-        //Get Response  
-        InputStream is = connection.getInputStream();
-        return connection.getContentType();
+    public String getHikeInfo() {
+        String hikeInfo = getApiInfo("");
+        return "";
     }
     
+    public String getHikePosition() {
+        String hikePosition = getApiInfo("http://open.mapquestapi.com/geocoding/v1/address?key=PDjIk1CuAfcFT0Bcr2w4Ep9uPRMH5T89&location=" + this.address.replace(" ", "+") + "," + this.state + "," + this.city + "," + this.postalCode);
+        //Need to get only the lng and lat from the result.
+        try {
+            JSONObject jsonObj = new JSONObject(hikePosition);
+            return jsonObj + "";
+        } catch(JSONException e) {
+            return "An error has occurred. " + e;
+        }
+
+        //return hikePosition;
+    }
+    
+    private String getApiInfo(String url)  {
+        try {
+            URL oracle = new URL(url);
+            BufferedReader in = new BufferedReader(
+            new InputStreamReader(oracle.openStream()));
+
+            String output = "";
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) output += inputLine;
+            in.close();
+            return output;
+        } catch(IOException e) {
+            return "An error occurred in HikesFrame.getApiInfo() " + e;
+        }
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
