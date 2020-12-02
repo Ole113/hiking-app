@@ -34,11 +34,12 @@ public class HikesFrame extends javax.swing.JFrame {
         this.city = city;
         this.state = state;
         initComponents();
+        
     }
 
     public String getHikeInfo() throws JSONException {
         String apiKey = "200955643-5409210a90c1c5739821d1efae87d2bb";
-        String hikeInfo = getApiInfo("https://www.hikingproject.com/data/get-trails?lat=" + getHikePosition()[0] + "&lon=" + getHikePosition()[1] + "&maxResults=10&key=" + apiKey);
+        String hikeInfo = getApiInfo("https://www.hikingproject.com/data/get-trails?lat=" + getHikePosition()[0] + "&lon=" + getHikePosition()[1] + "&maxResults=5&key=" + apiKey);
         return hikeInfo;
     }
     
@@ -89,6 +90,25 @@ public class HikesFrame extends javax.swing.JFrame {
         } catch(IOException e) {
             return "An error occurred in HikesFrame.getApiInfo() " + e;
         }
+    }
+    
+    public String[] getHikesNames() {
+        String[] hikesNames = new String[5];
+        
+        try {
+            JSONObject hikeApiResult = new JSONObject(getHikeInfo());
+            JSONArray hikesArray = hikeApiResult.getJSONArray("trails");
+            
+            for (int i = 0; i < hikesArray.length(); i++) {
+                String hikeName = hikesArray.getJSONObject(i).getString("name");
+                hikesNames[i] = hikeName;
+                //System.out.println(hikeName);
+            }
+            return hikesNames;
+        } catch(JSONException e) {
+            System.out.println("A JSONException has occured in getHikesNames()." + e);
+            return hikesNames;
+        }
 
     }
     /**
@@ -100,41 +120,31 @@ public class HikesFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jLabel7 = new javax.swing.JLabel();
-
-        jTextField1.setText("jTextField1");
-
-        jRadioButton1.setText("jRadioButton1");
+        hikeOneName = new javax.swing.JLabel();
+        hikeTwoName = new javax.swing.JLabel();
+        hikeThreeName = new javax.swing.JLabel();
+        hikeFourName = new javax.swing.JLabel();
+        hikeFiveName = new javax.swing.JLabel();
+        hikeOneButton = new javax.swing.JRadioButton();
+        hikeTwoButton = new javax.swing.JRadioButton();
+        hikeThreeButton = new javax.swing.JRadioButton();
+        hikeFourButton = new javax.swing.JRadioButton();
+        hikeFiveButton = new javax.swing.JRadioButton();
+        information = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText(this.address);
+        hikeOneName.setText(getHikesNames()[0]);
 
-        jLabel2.setText("jLabel2");
+        hikeTwoName.setText(getHikesNames()[1]);
 
-        jLabel3.setText("jLabel3");
+        hikeThreeName.setText(getHikesNames()[2]);
 
-        jLabel4.setText("jLabel4");
+        hikeFourName.setText(getHikesNames()[3]);
 
-        jLabel5.setText("jLabel5");
+        hikeFiveName.setText(getHikesNames()[4]);
 
-        jLabel6.setText("jLabel6");
-
-        jLabel7.setText("Choose a hike from below by clicking on a button to the right.");
+        information.setText("Choose a hike from below by clicking on a button to the right.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,85 +152,77 @@ public class HikesFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(0, 74, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(hikeFiveName, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                            .addComponent(hikeFourName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hikeThreeName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hikeOneName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hikeTwoName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(103, 103, 103))
+                    .addComponent(information))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(hikeTwoButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jRadioButton3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton6, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jRadioButton5, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jRadioButton4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jRadioButton2, javax.swing.GroupLayout.Alignment.TRAILING))))))
+                            .addComponent(hikeFiveButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(hikeFourButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(hikeThreeButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(hikeOneButton, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addComponent(jLabel7)
+                .addComponent(information)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton2))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hikeOneButton)
+                    .addComponent(hikeOneName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hikeTwoButton)
+                    .addComponent(hikeTwoName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hikeThreeName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(185, 185, 185))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton4))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton5))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton6))
-                        .addContainerGap())))
+                        .addGap(6, 6, 6)
+                        .addComponent(hikeThreeButton)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hikeFourButton)
+                    .addComponent(hikeFourName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hikeFiveButton)
+                    .addComponent(hikeFiveName, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        hikeOneName.getAccessibleContext().setAccessibleName("hikeOneName");
 
         pack();
     }// </editor-fold>                        
 
 
     // Variables declaration - do not modify                     
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JRadioButton hikeFiveButton;
+    private javax.swing.JLabel hikeFiveName;
+    private javax.swing.JRadioButton hikeFourButton;
+    private javax.swing.JLabel hikeFourName;
+    private javax.swing.JRadioButton hikeOneButton;
+    private javax.swing.JLabel hikeOneName;
+    private javax.swing.JRadioButton hikeThreeButton;
+    private javax.swing.JLabel hikeThreeName;
+    private javax.swing.JRadioButton hikeTwoButton;
+    private javax.swing.JLabel hikeTwoName;
+    private javax.swing.JLabel information;
     // End of variables declaration                   
 }
