@@ -7,6 +7,8 @@ package com.hikingapp.view;
 
 import javax.swing.*;
 
+import com.hikingapp.model.HikesInfo;
+
 /**
  *
  * @author Alex
@@ -14,6 +16,7 @@ import javax.swing.*;
 public class HomeFrame extends JFrame {
 
     private HikesFrame hikesFrame;
+    private HikesInfo hikesInfo;
     /**
      * Creates new form HomeFrame
      */
@@ -154,14 +157,15 @@ public class HomeFrame extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
         
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        //hikesFrame = new HikesFrame(addressTextField.getText(), postalCodeTextField.getText(), cityTextField.getText(), stateTextField.getText());
-        hikesFrame = new HikesFrame("8879 Summer Crest Drive", "84093", "Sandy", "Utah");
+        //hikesInfo = new HikesInfo(addressTextField.getText(), postalCodeTextField.getText(), cityTextField.getText(), stateTextField.getText());
+        hikesInfo = new HikesInfo("8879 Summer Crest Drive", "84093", "Sandy", "Utah");
+        hikesFrame = new HikesFrame(hikesInfo);
         hikesFrame.setVisible(true);
         this.setVisible(false);
         try {
             //System.out.println(getHikesFrame().getHikeInfo());
             //System.out.println(Arrays.toString(getHikesFrame().getHikeCoordinates()));
-            System.out.println(getHikesFrame().getHikePosition());
+            System.out.println(this.hikesFrame.getHikesNames());
         } catch (Exception e) {
             //Logger.getLogger(HomeFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

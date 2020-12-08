@@ -2,7 +2,13 @@ com/hikingapp/view/HomeFrame.class
 com/hikingapp/view/HikeInfoFrame.class
 com/hikingapp/view/HikeResultFrame$1.class
 com/hikingapp/view/HomeFrame$1.class
+com/hikingapp/view/HikesFrame$5.class
+com/hikingapp/model/HikesInfo.class
 com/hikingapp/controller/Runner.class
+com/hikingapp/view/HikesFrame$1.class
 com/hikingapp/controller/Runner$1.class
+com/hikingapp/view/HikesFrame$2.class
 com/hikingapp/view/HikeResultFrame.class
-com/hikingapp/view/HikeInfoFrame$1.class
+com/hikingapp/view/HikesFrame$4.class
+com/hikingapp/view/HikesFrame$3.class
+com/hikingapp/view/HikesFrame.class

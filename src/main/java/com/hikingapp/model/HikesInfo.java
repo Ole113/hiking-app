@@ -12,12 +12,13 @@ import java.net.URL;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.HashMap;
 
 /**
  *
  * @author alex
  */
-public class HikeInfo {
+public class HikesInfo {
     
     private String address;
     private String postalCode;
@@ -31,7 +32,7 @@ public class HikeInfo {
      * @param city
      * @param state 
      */
-    public HikeInfo(String address, String postalCode, String city, String state) {
+    public HikesInfo(String address, String postalCode, String city, String state) {
         this.address = address;
         this.postalCode = postalCode;
         this.city = city;
@@ -110,6 +111,12 @@ public class HikeInfo {
             System.out.println("A JSONException has occured in getHikesNames()." + e);
             return hikesNames;
         }
-
+    }
+    
+    public HashMap<String, String> getChosenHikeInfo(String chosenHike) {
+        HashMap<String, String> hikeInfo = new HashMap<String, String>();
+        //When the button is clicked the hike name will be input into this function and then the function will search for 
+        //the correct json of the hike and when it finds it it will get the other info about the hike and will add them to the hashmap.
+        return hikeInfo;
     }
 }
