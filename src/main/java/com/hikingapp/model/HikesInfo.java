@@ -104,8 +104,8 @@ public class HikesInfo {
             for (int i = 0; i < hikesArray.length(); i++) {
                 String hikeName = hikesArray.getJSONObject(i).getString("name");
                 hikesNames[i] = hikeName;
-                //System.out.println(hikeName);
             }
+            
             return hikesNames;
         } catch(JSONException e) {
             System.out.println("A JSONException has occured in getHikesNames()." + e);
@@ -115,8 +115,33 @@ public class HikesInfo {
     
     public HashMap<String, String> getChosenHikeInfo(String chosenHike) {
         HashMap<String, String> hikeInfo = new HashMap<String, String>();
-        //When the button is clicked the hike name will be input into this function and then the function will search for 
-        //the correct json of the hike and when it finds it it will get the other info about the hike and will add them to the hashmap.
-        return hikeInfo;
+
+        try {
+            JSONObject hikeApiResult = new JSONObject(getHikeInfo());
+            JSONArray hikesArray = hikeApiResult.getJSONArray("trails");
+            
+            for (int i = 0; i < hikesArray.length(); i++) {
+                JSONObject hike = hikesArray.getJSONObject(i);
+                if(hike.getString("name").equals(chosenHike)) {
+                    hikeInfo.put("name", hike.getString("name"));
+                    hikeInfo.put("summary", hike.getString("name"));
+                    hikeInfo.put("difficulty", hike.getString("difficulty"));
+                    hikeInfo.put("stars", hike.getString("stars"));
+                    hikeInfo.put("starVotes", hike.getString("starVotes"));
+                    hikeInfo.put("location", hike.getString("location"));
+                    hikeInfo.put("imgUrl", hike.getString("imgMedium"));
+                    hikeInfo.put("length", hike.getString("length"));
+                    hikeInfo.put("ascent", hike.getString("ascent"));
+                    hikeInfo.put("descent", hike.getString("descent"));
+                    hikeInfo.put("conditionDetails", hike.getString("conditionDetails"));
+                    hikeInfo.put("conditionDate", hike.getString("conditionDate"));
+                }
+            }
+            
+            return hikeInfo;
+        } catch(JSONException e) {
+            System.out.println("A JSONException has occured in getChosenHikeInfo(..)" + e);
+            return hikeInfo;
+        }
     }
 }

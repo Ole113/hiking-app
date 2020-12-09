@@ -5,7 +5,14 @@
  */
 package com.hikingapp.view;
 
+import java.awt.Image;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -14,6 +21,7 @@ import java.util.HashMap;
 public class HikeInfoFrame extends javax.swing.JFrame {
 
     private HashMap<String, String> hikeInfo;
+    
     /**
      * 
      * @param hikeInfo 
@@ -23,6 +31,30 @@ public class HikeInfoFrame extends javax.swing.JFrame {
         initComponents();
     }
 
+    public String getHikeName() {
+        return "<html><h1>" + this.hikeInfo.get("name") + "</h1></html>";
+    }
+    
+    public String getHikeStars() {
+        return this.hikeInfo.get("stars");
+    }
+    
+    public String getHikeImgUrl() {
+        return this.hikeInfo.get("imgUrl");
+    }
+    
+    public String getHikeImage() {
+        try {
+            URL url = new URL(getHikeImgUrl());
+            Image image = ImageIO.read(url);
+            jLabel2.setIcon(new ImageIcon(image));
+
+        } catch(Exception e) {
+            
+        }
+        return "";
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,22 +64,43 @@ public class HikeInfoFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText(getHikeName());
+
+        jLabel2.setText(getHikeImage());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(99, 99, 99)
+                .addComponent(jLabel2)
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

@@ -162,13 +162,6 @@ public class HomeFrame extends JFrame {
         hikesFrame = new HikesFrame(hikesInfo);
         hikesFrame.setVisible(true);
         this.setVisible(false);
-        try {
-            //System.out.println(getHikesFrame().getHikeInfo());
-            //System.out.println(Arrays.toString(getHikesFrame().getHikeCoordinates()));
-            System.out.println(this.hikesFrame.getHikesNames());
-        } catch (Exception e) {
-            //Logger.getLogger(HomeFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     public String getAddressText() {

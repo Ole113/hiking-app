@@ -159,6 +159,7 @@ public class HikesFrame extends javax.swing.JFrame {
     private void showHikeInfoFrame(HashMap<String, String> hikeInfo) {
         hikeInfoFrame = new HikeInfoFrame(hikeInfo);
         hikeInfoFrame.setVisible(true);
+        System.out.println(hikeInfoFrame.getHikeImgUrl());
         this.setVisible(false);
     }
     
