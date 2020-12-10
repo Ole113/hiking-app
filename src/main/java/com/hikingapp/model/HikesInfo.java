@@ -124,7 +124,7 @@ public class HikesInfo {
                 JSONObject hike = hikesArray.getJSONObject(i);
                 if(hike.getString("name").equals(chosenHike)) {
                     hikeInfo.put("name", hike.getString("name"));
-                    hikeInfo.put("summary", hike.getString("name"));
+                    hikeInfo.put("summary", hike.getString("summary"));
                     hikeInfo.put("difficulty", hike.getString("difficulty"));
                     hikeInfo.put("stars", hike.getString("stars"));
                     hikeInfo.put("starVotes", hike.getString("starVotes"));
@@ -133,8 +133,12 @@ public class HikesInfo {
                     hikeInfo.put("length", hike.getString("length"));
                     hikeInfo.put("ascent", hike.getString("ascent"));
                     hikeInfo.put("descent", hike.getString("descent"));
+                    hikeInfo.put("high", hike.getString("high"));
+                    hikeInfo.put("low", hike.getString("low"));
+                    hikeInfo.put("conditionStatus", hike.getString("conditionStatus"));
                     hikeInfo.put("conditionDetails", hike.getString("conditionDetails"));
                     hikeInfo.put("conditionDate", hike.getString("conditionDate"));
+                    hikeInfo.put("url", hike.getString("url"));
                 }
             }
             
