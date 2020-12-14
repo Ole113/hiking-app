@@ -13,16 +13,16 @@ import java.util.HashMap;
  */
 public class HikesFrame extends javax.swing.JFrame {
 
-    private HikesInfo hikesInfo;
+    private final HikesInfo HIKES;
     private HikeInfoFrame hikeInfoFrame;
 
     public HikesFrame(HikesInfo hikesInfo) {
-        this.hikesInfo = hikesInfo;
+        this.HIKES = hikesInfo;
         initComponents();
     }
     
     public String[] getHikesNames() {
-        return hikesInfo.getHikesNames();
+        return HIKES.getHikesNames();
     }
 
     /**
@@ -164,23 +164,23 @@ public class HikesFrame extends javax.swing.JFrame {
     }
     
     private void hikeOneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeOneButtonActionPerformed
-        showHikeInfoFrame(hikesInfo.getChosenHikeInfo(getHikesNames()[0]));
+        showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[0]));
     }//GEN-LAST:event_hikeOneButtonActionPerformed
 
     private void hikeTwoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeTwoButtonActionPerformed
-        showHikeInfoFrame(hikesInfo.getChosenHikeInfo(getHikesNames()[1]));
+        showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[1]));
     }//GEN-LAST:event_hikeTwoButtonActionPerformed
 
     private void hikeThreeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeThreeButtonActionPerformed
-        showHikeInfoFrame(hikesInfo.getChosenHikeInfo(getHikesNames()[2]));
+        showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[2]));
     }//GEN-LAST:event_hikeThreeButtonActionPerformed
 
     private void hikeFourButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeFourButtonActionPerformed
-        showHikeInfoFrame(hikesInfo.getChosenHikeInfo(getHikesNames()[3]));
+        showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[3]));
     }//GEN-LAST:event_hikeFourButtonActionPerformed
 
     private void hikeFiveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeFiveButtonActionPerformed
-        showHikeInfoFrame(hikesInfo.getChosenHikeInfo(getHikesNames()[4]));
+        showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[4]));
     }//GEN-LAST:event_hikeFiveButtonActionPerformed
 
 

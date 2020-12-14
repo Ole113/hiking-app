@@ -6,13 +6,14 @@
 package com.hikingapp.view;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 /**
  *
@@ -20,23 +21,24 @@ import javax.swing.ImageIcon;
  */
 public class HikeInfoFrame extends javax.swing.JFrame {
 
-    private HashMap<String, String> hikeInfo;
+    private final HashMap<String, String> HIKE_INFO;
     
     /**
      * 
      * @param hikeInfo 
      */
     public HikeInfoFrame(HashMap<String, String> hikeInfo) {
-        this.hikeInfo = hikeInfo;
+        this.HIKE_INFO = hikeInfo;
         initComponents();
+        //this.hikeTime.setVisible(false);
     }
 
     public String getHikeName() {
-        return "<html><h1>" + this.hikeInfo.get("name") + "</h1></html>";
+        return "<html><h1>" + this.HIKE_INFO.get("name") + "</h1></html>";
     }
     
     public String getHikeImgUrl() {
-        return this.hikeInfo.get("imgUrl");
+        return this.HIKE_INFO.get("imgUrl");
     }
     
     /**
@@ -55,51 +57,59 @@ public class HikeInfoFrame extends javax.swing.JFrame {
     }
     
     public String getHikeStars() {
-        return "Hike rating: " + this.hikeInfo.get("stars") + "(" + this.hikeInfo.get("starVotes") + ")";
+        return "Hike rating: " + this.HIKE_INFO.get("stars") + "(" + this.HIKE_INFO.get("starVotes") + ")";
     }
     
     public String getHikeDifficulty() {
-        return "Hike difficulty: " + this.hikeInfo.get("difficulty");
+        return "Hike difficulty: " + this.HIKE_INFO.get("difficulty");
     }
     
     public String getHikeSummary() {
-        return this.hikeInfo.get("summary");
+        return this.HIKE_INFO.get("summary");
     }
     
     public String getHikeAscent() {
-        return "Ascent: " + this.hikeInfo.get("ascent");
+        return "Ascent: " + this.HIKE_INFO.get("ascent");
     }
     
     public String getHikeDescent() {
-        return "Descent: " + this.hikeInfo.get("descent");
+        return "Descent: " + this.HIKE_INFO.get("descent");
     }
     
     public String getHikeHigh() {
-        return "High High: " + this.hikeInfo.get("high");
+        return "High High: " + this.HIKE_INFO.get("high");
     }
     
     public String getHikeLow() {
-        return "Hike Low: " + this.hikeInfo.get("low");
+        return "Hike Low: " + this.HIKE_INFO.get("low");
     }
     
     public String getHikeLocation() {
-        return this.hikeInfo.get("location");
+        return this.HIKE_INFO.get("location");
     }
     
     public String getHikeLength() {
-        return "Hike length: " + this.hikeInfo.get("length") + " miles";
+        return "Hike length: " + this.HIKE_INFO.get("length") + " miles";
     }
     
     public String getHikeCondition() {
-        return "Hike status: " + this.hikeInfo.get("conditionStatus") + ", hike condition: " + this.hikeInfo.get("conditionDetails");
+        return "Hike status: " + this.HIKE_INFO.get("conditionStatus") + ", " + (!this.HIKE_INFO.get("conditionDetails").isEmpty() ? this.HIKE_INFO.get("conditionDetails") : "N/A");
     }
     
+    /**
+     * Gets t
+     * @return 
+     */
     public String getHikeMoreInfo() {
-        return "To learn more go to this link: " + this.hikeInfo.get("url");
+        return "To learn more go to this link: " + this.HIKE_INFO.get("url");
     }
     
+    /**
+     * Gets the date that the hike condition was last updated at.
+     * @return A string with the date.
+     */
     public String getHikeConditionDate() {
-        return "Last updated: " + this.hikeInfo.get("conditionDate");
+        return "Last updated: " + this.HIKE_INFO.get("conditionDate");
     }
     /**
      *
@@ -126,6 +136,7 @@ public class HikeInfoFrame extends javax.swing.JFrame {
         hikeStart = new javax.swing.JButton();
         hikeMoreInfo = new javax.swing.JLabel();
         hikeConditionDate = new javax.swing.JLabel();
+        hikeTime = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -154,7 +165,7 @@ public class HikeInfoFrame extends javax.swing.JFrame {
 
         hikeCondition.setText(getHikeCondition());
 
-        hikeStart.setText("Start");
+        hikeStart.setText("Start Hike Timer");
         hikeStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hikeStartActionPerformed(evt);
@@ -192,7 +203,8 @@ public class HikeInfoFrame extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(hikeLow)
                                     .addComponent(hikeDifficulty)
-                                    .addComponent(highDescent))))
+                                    .addComponent(highDescent)))
+                            .addComponent(hikeTime))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -229,14 +241,24 @@ public class HikeInfoFrame extends javax.swing.JFrame {
                 .addComponent(hikeMoreInfo)
                 .addGap(35, 35, 35)
                 .addComponent(hikeStart)
-                .addGap(56, 56, 56))
+                .addGap(18, 18, 18)
+                .addComponent(hikeTime)
+                .addGap(22, 22, 22))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void hikeStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeStartActionPerformed
-        //Starts the hike timer.
+        //this.hikeTime.setVisible(false);
+        System.out.println("Started");
+        ActionListener taskPerformer = (ActionEvent evt1) -> {
+            
+            System.out.println("Reading SMTP Info.");
+        };
+        Timer timer = new Timer(100 ,taskPerformer);
+        timer.setRepeats(false);
+        timer.start();
     }//GEN-LAST:event_hikeStartActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -255,5 +277,6 @@ public class HikeInfoFrame extends javax.swing.JFrame {
     private javax.swing.JLabel hikeStars;
     private javax.swing.JButton hikeStart;
     private javax.swing.JLabel hikeSummary;
+    private javax.swing.JLabel hikeTime;
     // End of variables declaration//GEN-END:variables
 }

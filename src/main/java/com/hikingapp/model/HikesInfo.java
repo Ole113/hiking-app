@@ -20,10 +20,10 @@ import java.util.HashMap;
  */
 public class HikesInfo {
     
-    private String address;
-    private String postalCode;
-    private String city;
-    private String state;
+    private final String ADDRESS;
+    private final String POSTAL_CODE;
+    private final String CITY;
+    private final String STATE;
     
     /**
      * 
@@ -33,10 +33,10 @@ public class HikesInfo {
      * @param state 
      */
     public HikesInfo(String address, String postalCode, String city, String state) {
-        this.address = address;
-        this.postalCode = postalCode;
-        this.city = city;
-        this.state = state;
+        this.ADDRESS = address;
+        this.POSTAL_CODE = postalCode;
+        this.CITY = city;
+        this.STATE = state;
     }
     
     public String getHikeInfo() throws JSONException {
@@ -52,7 +52,7 @@ public class HikesInfo {
      */
     private double[] getHikePosition() throws JSONException {
         String apiKey = "PDjIk1CuAfcFT0Bcr2w4Ep9uPRMH5T89";
-        String hikePosition = getApiInfo("http://open.mapquestapi.com/geocoding/v1/address?key=" + apiKey + "&location=" + this.address.replace(" ", "+") + "," + this.state + "," + this.city + "," + this.postalCode);
+        String hikePosition = getApiInfo("http://open.mapquestapi.com/geocoding/v1/address?key=" + apiKey + "&location=" + this.ADDRESS.replace(" ", "+") + "," + this.STATE + "," + this.CITY + "," + this.POSTAL_CODE);
         JSONObject apiJSON = new JSONObject(hikePosition);
 
         double[] hikeLatLng = new double[2];

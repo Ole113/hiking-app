@@ -50,6 +50,7 @@
                                   <Component id="highDescent" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="hikeTime" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -94,7 +95,9 @@
               <Component id="hikeMoreInfo" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="hikeStart" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="hikeTime" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -189,7 +192,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="hikeStart">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Start"/>
+        <Property name="text" type="java.lang.String" value="Start Hike Timer"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hikeStartActionPerformed"/>
@@ -208,6 +211,8 @@
           <Connection code="getHikeConditionDate()" type="code"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="hikeTime">
     </Component>
   </SubComponents>
 </Form>
