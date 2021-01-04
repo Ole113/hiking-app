@@ -1,15 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
-  <zoom_level>10</zoom_level>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>10</x>
-      <y>40</y>
-      <w>360</w>
-      <h>410</h>
-    </coordinates>
-    <panel_attributes>
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>320</x><y>120</y><w>290</w><h>640</h></coordinates><panel_attributes>
 HomeFrame
 
 --
@@ -29,6 +18,9 @@ HomeFrame
 - topPanel: JPanel
 - welcomeLabel: JLabel
 
+
+
+
 --
 
 + HomeFrame()
@@ -36,18 +28,7 @@ HomeFrame
 + getAddressText(): String
 + getHikesFrame(): HikesFrame
 - initComponents(): void
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>400</x>
-      <y>20</y>
-      <w>380</w>
-      <h>470</h>
-    </coordinates>
-    <panel_attributes>
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>10</x><y>120</y><w>300</w><h>640</h></coordinates><panel_attributes>
 HikesFrame
 
 --
@@ -66,6 +47,10 @@ HikesFrame
 - hikeTwoLabel: JLabel
 - titleLabel: JLabel
 
+
+
+
+
 --
 
 + HikesFrame(HikesInfo)
@@ -76,43 +61,68 @@ HikesFrame
 - hikeTwoButtonActionPerformed(ActionEvent): void
 - hikeThreeButtonActionPerformed(ActionEvent): void
 - hikeFourButtonActionPerformed(ActionEvent): void
-- hikeFiveButtonActionPerformed(ActionEvent): void</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>880</x>
-      <y>140</y>
-      <w>300</w>
-      <h>480</h>
-    </coordinates>
-    <panel_attributes>SimpleClass</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>170</x>
-      <y>440</y>
-      <w>30</w>
-      <h>140</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>50</x>
-      <y>560</y>
-      <w>260</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>JFrame
+- hikeFiveButtonActionPerformed(ActionEvent): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>620</x><y>120</y><w>300</w><h>640</h></coordinates><panel_attributes>
+HikeInfoFrame
+
 --
 
---</panel_attributes>
-    <additional_attributes/>
-  </element>
-</diagram>
+- HIKE_INFO: HashMap&lt;String, String&gt;
+- highDescent: JLabel
+- hikeAscent: JLabel
+- hikeCondition: JLabel
+- hikeConditionDate: JLabel
+- hikeDifficulty: JLabel
+- hikeHigh: JLabel
+-hikeImage: JLabel
+- hikeLength: JLabel
+- hikeLocation: JLabel
+- hikeLow: JLabel
+- hikeMoreInfo: JLabel
+- hikeName: JLabel
+- hikeStars: JLabel
+- hikeStart: JLabel
+- hikeSummary: JLabel
+- hikeTime: JLabel
+
+--
+
++ HikeInfoFrame(HashMap&lt;String, String&gt;)
++ getHikeName(): String
++ getHikeImgUrl(): String
++ getHikeImage(): String
++ getHikeStars(): String
++ getHikeDifficulty(): String
++ getHikeSummary(): String
++ getHikeAscent(): String
++ getHikeDescent(): String
++ getHikeHigh(): String
++ getHikeLow(): String
++ getHikeLocation(): String
++ getHikeLength(): String
++ getHikeCondition(): String
++ getHikeMoreInfo(): String
++ getHikeConditionDate(): String
+-  initComponents(): void
+- hikeStartActionPerformed(ActionEvent): void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>330</x><y>0</y><w>260</w><h>60</h></coordinates><panel_attributes>JFrame
+--
+
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>150</x><y>50</y><w>330</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>310;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>450</x><y>50</y><w>340</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;320;70</additional_attributes></element><element><id>Relation</id><coordinates><x>450</x><y>50</y><w>40</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;20;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1130</x><y>120</y><w>230</w><h>340</h></coordinates><panel_attributes>
+HikesInfo
+
+--
+
+- ADDRESS: String
+- POSTAL_CODE: String
+- CITY: String
+- STATE: String
+
+--
+
++ HikesInfo(String, String, String, String)
++ getHikeInfo(): String
++ getHikePosition(): double[]
+- getApiInfo(String): String
++ getHikesNames(): String
++ getChosenHikeInfo(String): HashMap&lt;String, String&gt;
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>
