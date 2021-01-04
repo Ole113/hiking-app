@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>40</y>
+      <w>360</w>
+      <h>410</h>
+    </coordinates>
+    <panel_attributes>
+HomeFrame
+
+--
+
+- hikesFrame: HikesFrame
+- hikesInfo: HikesInfo
+- addressLabel: JLabel
+- addressTextField: JTextField
+- bottomPanel: JPanel
+- cityLabel : JLabel
+- cityTextField: JTextField
+- infoLabel: JLabel
+- postalCodeLabel: JLabel
+- searchButton: JButton
+- stateLabel: JLabel
+- stateTextField: JTextField
+- topPanel: JPanel
+- welcomeLabel: JLabel
+
+--
+
++ HomeFrame()
+- searchButtonActionPerformed(ActionEvent): void
++ getAddressText(): String
++ getHikesFrame(): HikesFrame
+- initComponents(): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>20</y>
+      <w>380</w>
+      <h>470</h>
+    </coordinates>
+    <panel_attributes>
+HikesFrame
+
+--
+
+- HIKES: HikesInfo
+- hikeInfoFrame: HikeInfoFrame
+- hikeFiveButton: JButton
+- hikeFiveLabel: JLabel
+- hikeFourButton: JButton
+- hikeFourLabel: JLabel
+- hikeOneButton: JButton
+- hikeOneLabel: JLabel
+- hikeThreeButton: JButton
+- hikeThreeLabel: JLabel
+- hikeTwoButton: JButton
+- hikeTwoLabel: JLabel
+- titleLabel: JLabel
+
+--
+
++ HikesFrame(HikesInfo)
++ getHikesNames(): String[]
+- initComponents(): void
+- showHikeInfoFrame(HashMap&lt;String, String&gt;): void
+- hikeOneButtonActionPerformed(ActionEvent): void
+- hikeTwoButtonActionPerformed(ActionEvent): void
+- hikeThreeButtonActionPerformed(ActionEvent): void
+- hikeFourButtonActionPerformed(ActionEvent): void
+- hikeFiveButtonActionPerformed(ActionEvent): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>880</x>
+      <y>140</y>
+      <w>300</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>SimpleClass</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>440</y>
+      <w>30</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>560</y>
+      <w>260</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>JFrame
+--
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
