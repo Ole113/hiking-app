@@ -80,9 +80,9 @@ public class HikesInfo {
      */
     private String getApiInfo(String url)  {
         try {
-            URL oracle = new URL(url);
+            URL apiUrl = new URL(url);
             BufferedReader in = new BufferedReader(
-            new InputStreamReader(oracle.openStream()));
+            new InputStreamReader(apiUrl.openStream()));
 
             String output = "";
             String inputLine;
@@ -114,7 +114,7 @@ public class HikesInfo {
     }
     
     public HashMap<String, String> getChosenHikeInfo(String chosenHike) {
-        HashMap<String, String> hikeInfo = new HashMap<String, String>();
+        HashMap<String, String> hikeInfo = new HashMap<>();
 
         try {
             JSONObject hikeApiResult = new JSONObject(getHikeInfo());

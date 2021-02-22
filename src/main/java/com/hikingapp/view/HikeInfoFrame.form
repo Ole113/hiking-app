@@ -26,36 +26,60 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="hikeName" pref="388" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="hikeImage" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="hikeSummary" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="hikeLength" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="hikeLocation" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="hikeStart" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="hikeCondition" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="hikeMoreInfo" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="hikeConditionDate" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Component id="hikeName" pref="388" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="hikeAscent" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="hikeStars" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="hikeHigh" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="hikeImage" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="hikeSummary" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="hikeLocation" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="hikeMoreInfo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="hikeTime" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="time" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="hikeAscent" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="hikeStars" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="hikeHigh" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="hikeLow" min="-2" max="-2" attributes="0"/>
+                                              <Component id="hikeDifficulty" min="-2" max="-2" attributes="0"/>
+                                              <Component id="highDescent" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="hikeLength" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="hikeStart" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="hikeLow" min="-2" max="-2" attributes="0"/>
-                                  <Component id="hikeDifficulty" min="-2" max="-2" attributes="0"/>
-                                  <Component id="highDescent" min="-2" max="-2" attributes="0"/>
+                                  <Component id="hikeCondition" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="hikeConditionDate" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="hikeStop" max="32767" attributes="0"/>
+                                  <Component id="hikePause" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="hikeTime" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -64,7 +88,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="hikeName" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="time" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
               <Component id="hikeImage" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -76,26 +102,34 @@
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Component id="hikeSummary" min="-2" pref="16" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="highDescent" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="hikeAscent" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="highDescent" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="hikeAscent" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="hikeHigh" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="hikeLow" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="hikeLength" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="hikeStart" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="hikeCondition" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="hikePause" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="hikeHigh" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="hikeLow" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-              <Component id="hikeLength" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Component id="hikeCondition" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="hikeStop" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="hikeConditionDate" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="26" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="hikeMoreInfo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-              <Component id="hikeStart" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
               <Component id="hikeTime" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
@@ -128,11 +162,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="hikeDifficulty">
-      <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="getHikeDifficulty()" type="code"/>
-        </Property>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="hikeSummary">
       <Properties>
@@ -213,6 +242,24 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="hikeTime">
+    </Component>
+    <Component class="javax.swing.JLabel" name="time">
+    </Component>
+    <Component class="javax.swing.JButton" name="hikePause">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pause Hike Timer"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hikePauseActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="hikeStop">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Stop Hike Timer"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hikeStopActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
