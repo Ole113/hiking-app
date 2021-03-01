@@ -5,19 +5,63 @@
  */
 package com.hikingapp.view;
 
+import java.awt.Image;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Alex
  */
 public class HikeResultFrame extends javax.swing.JFrame {
 
+    private int hikeTimeSeconds;
+    private String hikeImageURL;
+    private String hikeLength;
+    private String hikeAscent;
+    private String hikeDescent;
+    private String hikeName;
+    private int[] hikeTime;
+    
     /**
-     * Creates new form HikeResultFrame
+     * Creates new form HikeResultFrame and instantiates the instance variables.
      */
-    public HikeResultFrame() {
+    public HikeResultFrame(int hikeTimeSeconds, int[] hikeTime, String hikeImageURL, String hikeLength, String hikeAscent, String hikeDescent, String hikeName) {
+        this.hikeTimeSeconds = hikeTimeSeconds;
+        this.hikeTime = hikeTime;
+        this.hikeImageURL = hikeImageURL;
+        this.hikeLength = hikeLength;
+        this.hikeAscent = hikeAscent;
+        this.hikeDescent = hikeDescent;
+        this.hikeName = hikeName;
         initComponents();
     }
 
+    private String getHikeSpeed() {
+        return "Average speed: " + Double.toString(Double.parseDouble(this.hikeLength) / this.hikeTimeSeconds) + " MPH";
+    }
+    
+    private String getHikeDistance() {
+        return "Total distance hiked: " + this.hikeLength + " miles";
+    }
+    
+    private String getHikeTime() {
+        return "Total hike time: " + this.hikeTime;
+    }
+    
+    private String getHikeImage() {
+                try {
+            URL url = new URL(hikeImageURL);
+            Image imageObject = ImageIO.read(url);
+            image.setIcon(new ImageIcon(imageObject));
+        } catch(IOException error) {
+            System.out.println("An IOException occured in getHikeImage(). " + error);
+        }
+        return "";
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,57 +71,55 @@ public class HikeResultFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        totalHikeTime = new javax.swing.JLabel();
+        image = new javax.swing.JLabel();
+        hikeDistance = new javax.swing.JLabel();
+        hikeSpeed = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        totalHikeTime.setText(getHikeTime());
+
+        image.setText(getHikeImage());
+
+        hikeDistance.setText(getHikeDistance());
+
+        hikeSpeed.setText(getHikeSpeed());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(totalHikeTime)
+                    .addComponent(image)
+                    .addComponent(hikeDistance)
+                    .addComponent(hikeSpeed))
+                .addContainerGap(310, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(totalHikeTime)
+                .addGap(18, 18, 18)
+                .addComponent(image)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hikeDistance)
+                .addGap(18, 18, 18)
+                .addComponent(hikeSpeed)
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HikeResultFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HikeResultFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HikeResultFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HikeResultFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HikeResultFrame().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel hikeDistance;
+    private javax.swing.JLabel hikeSpeed;
+    private javax.swing.JLabel image;
+    private javax.swing.JLabel totalHikeTime;
     // End of variables declaration//GEN-END:variables
 }

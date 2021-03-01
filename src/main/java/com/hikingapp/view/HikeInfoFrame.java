@@ -25,6 +25,8 @@ public class HikeInfoFrame extends javax.swing.JFrame {
     private int hikeTimerSeconds;
     private Timer timer;
     private boolean timerPaused;
+    private HikeResultFrame resultFrame;
+    private int[] hikeTimeFull;
     
     /**
      * 
@@ -131,6 +133,8 @@ public class HikeInfoFrame extends javax.swing.JFrame {
         else timeString += ":" + timeNumbers[1];
         if(timeNumbers[2] < 10) timeString += ":0" + timeNumbers[2];
         else timeString += ":" + timeNumbers[2];
+        
+        this.hikeTimeFull = timeNumbers;
         
         return timeString;
     }
@@ -326,6 +330,10 @@ public class HikeInfoFrame extends javax.swing.JFrame {
 
     private void hikeStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeStopActionPerformed
         this.timer.stop();
+        
+        this.resultFrame = new HikeResultFrame(this.hikeTimerSeconds, this.hikeTimeFull, this.HIKE_INFO.get("imgUrl"), this.HIKE_INFO.get("length"), this.HIKE_INFO.get("ascent"), this.HIKE_INFO.get("descent"), getHikeName());
+        this.resultFrame.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_hikeStopActionPerformed
 
     private void hikePauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikePauseActionPerformed
