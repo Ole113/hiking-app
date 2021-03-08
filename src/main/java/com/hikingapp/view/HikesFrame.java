@@ -6,7 +6,21 @@
 package com.hikingapp.view;
 
 import com.hikingapp.model.HikesInfo;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.HashMap;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 /**
  *
  * @author aelb2580
@@ -45,6 +59,7 @@ public class HikesFrame extends javax.swing.JFrame {
         hikeThreeButton = new javax.swing.JButton();
         hikeFourButton = new javax.swing.JButton();
         hikeFiveButton = new javax.swing.JButton();
+        importHike = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,6 +110,13 @@ public class HikesFrame extends javax.swing.JFrame {
             }
         });
 
+        importHike.setText("Import Hike");
+        importHike.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importHikeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,7 +142,10 @@ public class HikesFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(hikeFiveLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hikeFiveButton)))
+                        .addComponent(hikeFiveButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(importHike)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -129,6 +154,8 @@ public class HikesFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(importHike)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hikeOneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hikeOneButton))
@@ -144,7 +171,7 @@ public class HikesFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hikeFourLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(hikeFourButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hikeFiveLabel)
                     .addComponent(hikeFiveButton))
@@ -159,7 +186,6 @@ public class HikesFrame extends javax.swing.JFrame {
     private void showHikeInfoFrame(HashMap<String, String> hikeInfo) {
         hikeInfoFrame = new HikeInfoFrame(hikeInfo);
         hikeInfoFrame.setVisible(true);
-        System.out.println(hikeInfoFrame.getHikeImgUrl());
         this.setVisible(false);
     }
     
@@ -183,6 +209,50 @@ public class HikesFrame extends javax.swing.JFrame {
         showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[4]));
     }//GEN-LAST:event_hikeFiveButtonActionPerformed
 
+    private void importHikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importHikeActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File chosenFile = fileChooser.getSelectedFile();
+            
+            HashMap<String, String> importedHikeInformation = new HashMap<>();
+            //showHikeInfoFrame(importedHikInformation);
+            
+            JSONParser parser = new JSONParser();
+         
+            try (FileReader reader = new FileReader(chosenFile)) {
+                JSONObject jsonHikeInfo = (JSONObject) parser.parse(reader);
+
+                importedHikeInformation.put("name", (String) jsonHikeInfo.get("name"));
+                importedHikeInformation.put("summary", (String) jsonHikeInfo.get("summary"));
+                importedHikeInformation.put("difficulty", (String) jsonHikeInfo.get("difficulty"));
+                importedHikeInformation.put("stars", (String) jsonHikeInfo.get("stars"));
+                importedHikeInformation.put("starVotes", (String) jsonHikeInfo.get("starVotes"));
+                importedHikeInformation.put("location", (String) jsonHikeInfo.get("location"));
+                importedHikeInformation.put("imgUrl", (String) jsonHikeInfo.get("imgUrl"));
+                importedHikeInformation.put("length", (String) jsonHikeInfo.get("length"));
+                importedHikeInformation.put("ascent", (String) jsonHikeInfo.get("ascent"));
+                importedHikeInformation.put("descent", (String) jsonHikeInfo.get("descent"));
+                importedHikeInformation.put("high", (String) jsonHikeInfo.get("high"));
+                importedHikeInformation.put("low", (String) jsonHikeInfo.get("low"));
+                importedHikeInformation.put("conditionStatus", (String) jsonHikeInfo.get("conditionStatus"));
+                importedHikeInformation.put("conditionDetails", (String) jsonHikeInfo.get("conditionDetails"));
+                importedHikeInformation.put("conditionDate", (String) jsonHikeInfo.get("conditionDate"));
+                importedHikeInformation.put("url", (String) jsonHikeInfo.get("url"));
+                
+                showHikeInfoFrame(importedHikeInformation);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(HikesFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(HikesFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(HikesFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_importHikeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton hikeFiveButton;
@@ -195,6 +265,7 @@ public class HikesFrame extends javax.swing.JFrame {
     private javax.swing.JLabel hikeThreeLabel;
     private javax.swing.JButton hikeTwoButton;
     private javax.swing.JLabel hikeTwoLabel;
+    private javax.swing.JButton importHike;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

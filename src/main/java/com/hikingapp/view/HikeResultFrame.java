@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import java.io.File; 
 
 /**
  *
@@ -23,14 +25,14 @@ public class HikeResultFrame extends javax.swing.JFrame {
     private String hikeAscent;
     private String hikeDescent;
     private String hikeName;
-    private int[] hikeTime;
+    private String hikeTimeString;
     
     /**
      * Creates new form HikeResultFrame and instantiates the instance variables.
      */
-    public HikeResultFrame(int hikeTimeSeconds, int[] hikeTime, String hikeImageURL, String hikeLength, String hikeAscent, String hikeDescent, String hikeName) {
+    public HikeResultFrame(int hikeTimeSeconds, String hikeTimeString, String hikeImageURL, String hikeLength, String hikeAscent, String hikeDescent, String hikeName) {
         this.hikeTimeSeconds = hikeTimeSeconds;
-        this.hikeTime = hikeTime;
+        this.hikeTimeString = hikeTimeString;
         this.hikeImageURL = hikeImageURL;
         this.hikeLength = hikeLength;
         this.hikeAscent = hikeAscent;
@@ -48,11 +50,15 @@ public class HikeResultFrame extends javax.swing.JFrame {
     }
     
     private String getHikeTime() {
-        return "Total hike time: " + this.hikeTime;
+        return "Total hike time: " + this.hikeTimeString;
+    }
+    
+    private String getHikeName() {
+        return this.hikeName;
     }
     
     private String getHikeImage() {
-                try {
+        try {
             URL url = new URL(hikeImageURL);
             Image imageObject = ImageIO.read(url);
             image.setIcon(new ImageIcon(imageObject));
@@ -75,6 +81,7 @@ public class HikeResultFrame extends javax.swing.JFrame {
         image = new javax.swing.JLabel();
         hikeDistance = new javax.swing.JLabel();
         hikeSpeed = new javax.swing.JLabel();
+        name = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,6 +93,8 @@ public class HikeResultFrame extends javax.swing.JFrame {
 
         hikeSpeed.setText(getHikeSpeed());
 
+        name.setText(getHikeName());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,6 +103,7 @@ public class HikeResultFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(totalHikeTime)
+                    .addComponent(name)
                     .addComponent(image)
                     .addComponent(hikeDistance)
                     .addComponent(hikeSpeed))
@@ -104,13 +114,15 @@ public class HikeResultFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(totalHikeTime)
-                .addGap(18, 18, 18)
-                .addComponent(image)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(name)
+                .addGap(9, 9, 9)
+                .addComponent(image)
+                .addGap(18, 18, 18)
                 .addComponent(hikeDistance)
                 .addGap(18, 18, 18)
                 .addComponent(hikeSpeed)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         pack();
@@ -120,6 +132,7 @@ public class HikeResultFrame extends javax.swing.JFrame {
     private javax.swing.JLabel hikeDistance;
     private javax.swing.JLabel hikeSpeed;
     private javax.swing.JLabel image;
+    private javax.swing.JLabel name;
     private javax.swing.JLabel totalHikeTime;
     // End of variables declaration//GEN-END:variables
 }

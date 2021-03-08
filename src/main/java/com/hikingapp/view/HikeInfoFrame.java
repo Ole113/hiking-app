@@ -8,12 +8,20 @@ package com.hikingapp.view;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.Timer;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -26,7 +34,6 @@ public class HikeInfoFrame extends javax.swing.JFrame {
     private Timer timer;
     private boolean timerPaused;
     private HikeResultFrame resultFrame;
-    private int[] hikeTimeFull;
     
     /**
      * 
@@ -133,9 +140,7 @@ public class HikeInfoFrame extends javax.swing.JFrame {
         else timeString += ":" + timeNumbers[1];
         if(timeNumbers[2] < 10) timeString += ":0" + timeNumbers[2];
         else timeString += ":" + timeNumbers[2];
-        
-        this.hikeTimeFull = timeNumbers;
-        
+
         return timeString;
     }
     
@@ -168,6 +173,7 @@ public class HikeInfoFrame extends javax.swing.JFrame {
         time = new javax.swing.JLabel();
         hikePause = new javax.swing.JButton();
         hikeStop = new javax.swing.JButton();
+        exportHike = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -219,6 +225,13 @@ public class HikeInfoFrame extends javax.swing.JFrame {
             }
         });
 
+        exportHike.setText("Export Hike");
+        exportHike.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportHikeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -228,7 +241,10 @@ public class HikeInfoFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hikeName, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(hikeName, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(exportHike))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(hikeImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,7 +286,9 @@ public class HikeInfoFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(hikeName)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hikeName)
+                    .addComponent(exportHike))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(time)
                 .addGap(4, 4, 4)
@@ -331,7 +349,7 @@ public class HikeInfoFrame extends javax.swing.JFrame {
     private void hikeStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeStopActionPerformed
         this.timer.stop();
         
-        this.resultFrame = new HikeResultFrame(this.hikeTimerSeconds, this.hikeTimeFull, this.HIKE_INFO.get("imgUrl"), this.HIKE_INFO.get("length"), this.HIKE_INFO.get("ascent"), this.HIKE_INFO.get("descent"), getHikeName());
+        this.resultFrame = new HikeResultFrame(this.hikeTimerSeconds, getHikeTime(), this.HIKE_INFO.get("imgUrl"), this.HIKE_INFO.get("length"), this.HIKE_INFO.get("ascent"), this.HIKE_INFO.get("descent"), getHikeName());
         this.resultFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_hikeStopActionPerformed
@@ -347,7 +365,46 @@ public class HikeInfoFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_hikePauseActionPerformed
 
+    private void exportHikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportHikeActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File chosenFile = fileChooser.getSelectedFile();
+            
+            JSONObject hikeInfoObject = new JSONObject();
+            
+            try {
+                hikeInfoObject.put("name", this.HIKE_INFO.get("name"));
+                hikeInfoObject.put("summary", this.HIKE_INFO.get("summary"));
+                hikeInfoObject.put("difficulty", this.HIKE_INFO.get("difficulty"));
+                hikeInfoObject.put("stars", this.HIKE_INFO.get("stars"));
+                hikeInfoObject.put("starVotes", this.HIKE_INFO.get("starVotes"));
+                hikeInfoObject.put("location", this.HIKE_INFO.get("location"));
+                hikeInfoObject.put("imgUrl", this.HIKE_INFO.get("imgUrl"));
+                hikeInfoObject.put("length", this.HIKE_INFO.get("length"));
+                hikeInfoObject.put("ascent", this.HIKE_INFO.get("ascent"));
+                hikeInfoObject.put("descent", this.HIKE_INFO.get("descent"));
+                hikeInfoObject.put("high", this.HIKE_INFO.get("high"));
+                hikeInfoObject.put("low", this.HIKE_INFO.get("low"));
+                hikeInfoObject.put("conditionStatus", this.HIKE_INFO.get("conditionStatus"));
+                hikeInfoObject.put("conditionDetails", this.HIKE_INFO.get("conditionDetails"));
+                hikeInfoObject.put("conditionDate", this.HIKE_INFO.get("conditionDate"));
+                hikeInfoObject.put("url", this.HIKE_INFO.get("url"));
+                
+                FileWriter file = new FileWriter(chosenFile);
+                file.write(hikeInfoObject.toString()); 
+                file.flush();
+
+            } catch (JSONException | IOException ex) {
+                Logger.getLogger(HikeInfoFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_exportHikeActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton exportHike;
     private javax.swing.JLabel highDescent;
     private javax.swing.JLabel hikeAscent;
     private javax.swing.JLabel hikeCondition;
