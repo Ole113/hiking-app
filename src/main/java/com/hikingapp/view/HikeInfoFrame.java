@@ -5,12 +5,15 @@
  */
 package com.hikingapp.view;
 
+import com.hikingapp.model.ModifyFile;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static java.awt.image.ImageObserver.ERROR;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -369,8 +372,7 @@ public class HikeInfoFrame extends javax.swing.JFrame {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         
-        int result = fileChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File chosenFile = fileChooser.getSelectedFile();
             
             JSONObject hikeInfoObject = new JSONObject();
@@ -393,9 +395,14 @@ public class HikeInfoFrame extends javax.swing.JFrame {
                 hikeInfoObject.put("conditionDate", this.HIKE_INFO.get("conditionDate"));
                 hikeInfoObject.put("url", this.HIKE_INFO.get("url"));
                 
-                FileWriter file = new FileWriter(chosenFile);
-                file.write(hikeInfoObject.toString()); 
-                file.flush();
+                ModifyFile modifier = new ModifyFile();
+
+                //Checks if there's anything in the file that the user has chosen, if there is then it is cleared.
+                if(!(new String(modifier.readFromFile(chosenFile, 0, (int) chosenFile.length())).equals(""))) {
+                    modifier.clearContents(chosenFile);
+                }
+                
+                modifier.writeToFile(chosenFile, hikeInfoObject.toString(), 0);
 
             } catch (JSONException | IOException ex) {
                 Logger.getLogger(HikeInfoFrame.class.getName()).log(Level.SEVERE, null, ex);

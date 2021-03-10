@@ -6,17 +6,17 @@
 package com.hikingapp.view;
 
 import com.hikingapp.model.HikesInfo;
+import com.hikingapp.model.ModifyFile;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
+import java.io.RandomAccessFile;
 import java.util.HashMap;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -221,9 +221,11 @@ public class HikesFrame extends javax.swing.JFrame {
             //showHikeInfoFrame(importedHikInformation);
             
             JSONParser parser = new JSONParser();
-         
-            try (FileReader reader = new FileReader(chosenFile)) {
-                JSONObject jsonHikeInfo = (JSONObject) parser.parse(reader);
+            ModifyFile modifier = new ModifyFile();
+
+            try {
+                String fileText = new String(modifier.readFromFile(chosenFile, 0, (int) chosenFile.length()));
+                JSONObject jsonHikeInfo = (JSONObject) parser.parse(fileText);
 
                 importedHikeInformation.put("name", (String) jsonHikeInfo.get("name"));
                 importedHikeInformation.put("summary", (String) jsonHikeInfo.get("summary"));
@@ -245,9 +247,7 @@ public class HikesFrame extends javax.swing.JFrame {
                 showHikeInfoFrame(importedHikeInformation);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(HikesFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(HikesFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
+            } catch (IOException | ParseException ex) {
                 Logger.getLogger(HikesFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

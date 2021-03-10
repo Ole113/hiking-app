@@ -16,7 +16,6 @@ import java.util.HashMap;
 
 /**
  *
- * @author alex
  */
 public class HikesInfo {
     
