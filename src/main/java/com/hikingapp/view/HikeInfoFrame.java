@@ -28,7 +28,6 @@ import org.json.JSONObject;
 
 /**
  *
- * @author Alex
  */
 public class HikeInfoFrame extends javax.swing.JFrame {
 
