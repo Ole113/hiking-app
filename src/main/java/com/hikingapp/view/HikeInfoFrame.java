@@ -1,19 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.hikingapp.view;
 
 import com.hikingapp.model.ModifyFile;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static java.awt.image.ImageObserver.ERROR;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -22,12 +14,11 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.Timer;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- *
+ * Displays the information about the hike in GUI form.
  */
 public class HikeInfoFrame extends javax.swing.JFrame {
 
@@ -38,21 +29,28 @@ public class HikeInfoFrame extends javax.swing.JFrame {
     private HikeResultFrame resultFrame;
     
     /**
-     * 
-     * @param hikeInfo 
+     * Initializes the instance variables and initializes the form components.
+     * @param hikeInfo The HashMap that contains all of the information about the hike such as name, distance, etc.
      */
     public HikeInfoFrame(HashMap<String, String> hikeInfo) {
         this.HIKE_INFO = hikeInfo;
         this.hikeTimerSeconds = 0;
         this.timerPaused = true;
         initComponents();
-        //this.hikeTime.setVisible(false);
     }
 
+    /**
+     * Gets the name of the hike marked up with HTML.
+     * @return The hike's name.
+     */
     public String getHikeName() {
         return "<html><h1>" + this.HIKE_INFO.get("name") + "</h1></html>";
     }
     
+    /**
+     * Gets the URL of the hike's image.
+     * @return The URL.
+     */
     public String getHikeImgUrl() {
         return this.HIKE_INFO.get("imgUrl");
     }
@@ -72,49 +70,91 @@ public class HikeInfoFrame extends javax.swing.JFrame {
         return "";
     }
     
+    /**
+     * Gets the stars for the hike and the star votes.
+     * The stars is the rating out of 5 and the star votes is the number of people who have voted for the rating.
+     * @return The hike rating.
+     */
     public String getHikeStars() {
         return "Hike rating: " + this.HIKE_INFO.get("stars") + "(" + this.HIKE_INFO.get("starVotes") + ")";
     }
     
+    /**
+     * Gets the difficulty of the hike.
+     * @return Hike difficulty.
+     */
     public String getHikeDifficulty() {
         return "Hike difficulty: " + this.HIKE_INFO.get("difficulty");
     }
     
+    /**
+     * Gets the summary of the hike.
+     * @return Hike summary.
+     */
     public String getHikeSummary() {
         return this.HIKE_INFO.get("summary");
     }
     
+    /**
+     * Gets the ascent of the hike.
+     * @return Hike ascent.
+     */
     public String getHikeAscent() {
         return "Ascent: " + this.HIKE_INFO.get("ascent");
     }
     
+    /**
+     * Gets the descent of the hike.
+     * @return Hike descent.
+     */
     public String getHikeDescent() {
         return "Descent: " + this.HIKE_INFO.get("descent");
     }
     
+    /**
+     * Gets the highest point of the hike.
+     * @return Hike high.
+     */
     public String getHikeHigh() {
         return "High High: " + this.HIKE_INFO.get("high");
     }
     
+    /**
+     * Gets the lowest point of the hike.
+     * @return Hike low.
+     */
     public String getHikeLow() {
         return "Hike Low: " + this.HIKE_INFO.get("low");
     }
     
+    /**
+     * Gets the location of the hike.
+     * @return Hike location.
+     */
     public String getHikeLocation() {
         return this.HIKE_INFO.get("location");
     }
     
+    /**
+     * Gets the length of the hike.
+     * @return Hike Length.
+     */
     public String getHikeLength() {
         return "Hike length: " + this.HIKE_INFO.get("length") + " miles";
     }
     
+    /**
+     * Gets the condition of the hike.
+     * The condition details is commonly empty.
+     * @return Hike condition
+     */
     public String getHikeCondition() {
         return "Hike status: " + this.HIKE_INFO.get("conditionStatus") + ", " + (!this.HIKE_INFO.get("conditionDetails").isEmpty() ? this.HIKE_INFO.get("conditionDetails") : "N/A");
     }
     
     /**
-     * Gets t
-     * @return 
+     * Gets the URL of the website where more information is available about the hike.
+     * @return Website URL.
      */
     public String getHikeMoreInfo() {
         return "To learn more go to this link: " + this.HIKE_INFO.get("url");
@@ -128,6 +168,10 @@ public class HikeInfoFrame extends javax.swing.JFrame {
         return "Last updated: " + this.HIKE_INFO.get("conditionDate");
     }
     
+    /**
+     * Gets the time that the hike timer has been running in a string format separated with colons.
+     * @return Hike Time.
+     */
     public String getHikeTime() {
         int[] timeNumbers = { 0, 0, 0 };
         String timeString = "";
@@ -334,6 +378,10 @@ public class HikeInfoFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * When the hike start button is clicked the hike timer is started.
+     * @param evt The parameter that is passed in by the action being performed.
+     */
     private void hikeStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeStartActionPerformed
         if(this.hikeTimerSeconds == 0) {
             ActionListener updateTime = (ActionEvent evt1) -> {
@@ -348,6 +396,10 @@ public class HikeInfoFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_hikeStartActionPerformed
 
+    /**
+     * When the hike stop button is clicked then the results of the hike timer will show.
+     * @param evt The parameter that is passed in by the action being performed.
+     */
     private void hikeStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeStopActionPerformed
         this.timer.stop();
         
@@ -356,6 +408,10 @@ public class HikeInfoFrame extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_hikeStopActionPerformed
 
+    /**
+     * Toggle for pausing/unpausing the hike.
+     * @param evt The parameter that is passed in by the action being performed.
+     */
     private void hikePauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikePauseActionPerformed
         if(!this.timerPaused) {
             this.timer.stop();
@@ -367,6 +423,10 @@ public class HikeInfoFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_hikePauseActionPerformed
 
+    /**
+     * Exports the hike to the chosen file.
+     * @param evt The parameter that is passed in by the action being performed.
+     */
     private void exportHikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportHikeActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));

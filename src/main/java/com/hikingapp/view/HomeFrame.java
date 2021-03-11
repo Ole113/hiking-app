@@ -10,15 +10,15 @@ import javax.swing.*;
 import com.hikingapp.model.HikesInfo;
 
 /**
- *
- * @author Alex
+ * Gets the address that the user wants to find hikes near.
  */
 public class HomeFrame extends JFrame {
 
     private HikesFrame hikesFrame;
     private HikesInfo hikesInfo;
+    
     /**
-     * Creates new form HomeFrame
+     * Initializes the components in the HomeFrame class.
      */
     public HomeFrame() {
         initComponents();
@@ -155,7 +155,11 @@ public class HomeFrame extends JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-        
+    
+    /**
+     * When the search button is clicked.
+     * @param evt The parameter that is passed in automatically when the button is clicked.
+     */
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         //hikesInfo = new HikesInfo(addressTextField.getText(), postalCodeTextField.getText(), cityTextField.getText(), stateTextField.getText());
         hikesInfo = new HikesInfo("8879 Summer Crest Drive", "84093", "Sandy", "Utah");
@@ -164,10 +168,18 @@ public class HomeFrame extends JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_searchButtonActionPerformed
 
+    /**
+     * Gets the address that the user input.
+     * @return The address.
+     */
     public String getAddressText() {
         return this.addressTextField.getText();
     }
     
+    /**
+     * Gets the hikes frame.
+     * @return The hikes frame.
+     */
     public HikesFrame getHikesFrame() {
         return this.hikesFrame;
     }

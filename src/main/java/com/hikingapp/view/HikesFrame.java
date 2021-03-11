@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.hikingapp.view;
 
 import com.hikingapp.model.HikesInfo;
@@ -10,9 +5,7 @@ import com.hikingapp.model.ModifyFile;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,19 +15,26 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
- *
- * @author aelb2580
+ * Deals with the user choosing which of the five hikes they want or if they want to import a hike.
  */
 public class HikesFrame extends javax.swing.JFrame {
 
     private final HikesInfo HIKES;
     private HikeInfoFrame hikeInfoFrame;
 
+    /**
+     * Initializes the hikes and the form components.
+     * @param hikesInfo The info of the hikes.
+     */
     public HikesFrame(HikesInfo hikesInfo) {
         this.HIKES = hikesInfo;
         initComponents();
     }
     
+    /**
+     * Gets all the hike names.
+     * @return The hike names in an array.
+     */
     public String[] getHikesNames() {
         return HIKES.getHikesNames();
     }
@@ -183,32 +183,60 @@ public class HikesFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Shows the HikeInfoFrame and hides the current frame.
+     * @param hikeInfo The info pertaining to the hike that the user chose.
+     */
     private void showHikeInfoFrame(HashMap<String, String> hikeInfo) {
         hikeInfoFrame = new HikeInfoFrame(hikeInfo);
         hikeInfoFrame.setVisible(true);
         this.setVisible(false);
     }
     
+    /**
+     * Is clicked if the user wants to choose the first hike.
+     * @param evt The parameter passed in when the action is performed.
+     */
     private void hikeOneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeOneButtonActionPerformed
         showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[0]));
     }//GEN-LAST:event_hikeOneButtonActionPerformed
 
+    /**
+     * Is clicked if the user wants to choose the second hike.
+     * @param evt The parameter passed in when the action is performed.
+     */
     private void hikeTwoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeTwoButtonActionPerformed
         showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[1]));
     }//GEN-LAST:event_hikeTwoButtonActionPerformed
 
+    /**
+     * Is clicked if the user wants to choose the third hike.
+     * @param evt The parameter passed in when the action is performed.
+     */
     private void hikeThreeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeThreeButtonActionPerformed
         showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[2]));
     }//GEN-LAST:event_hikeThreeButtonActionPerformed
 
+    /**
+     * Is clicked if the user wants to choose the fourth hike.
+     * @param evt The parameter passed in when the action is performed.
+     */
     private void hikeFourButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeFourButtonActionPerformed
         showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[3]));
     }//GEN-LAST:event_hikeFourButtonActionPerformed
 
+    /**
+     * Is clicked if the user wants to choose the fifth hike.
+     * @param evt The parameter passed in when the action is performed.
+     */
     private void hikeFiveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeFiveButtonActionPerformed
         showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[4]));
     }//GEN-LAST:event_hikeFiveButtonActionPerformed
 
+    /**
+     * Fires if the import hike button has been fired which then prompts the user for the file to import.
+     * @param evt The parameter that was passed in when the action is performed.
+     */
     private void importHikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importHikeActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
