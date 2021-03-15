@@ -21,22 +21,16 @@ public class HikesFrame extends javax.swing.JFrame {
 
     private final HikesInfo HIKES;
     private HikeInfoFrame hikeInfoFrame;
-
+    private String[] hikesNames;
+    
     /**
      * Initializes the hikes and the form components.
      * @param hikesInfo The info of the hikes.
      */
     public HikesFrame(HikesInfo hikesInfo) {
         this.HIKES = hikesInfo;
+        this.hikesNames = HIKES.getHikesNames(new String[5]);
         initComponents();
-    }
-    
-    /**
-     * Gets all the hike names.
-     * @return The hike names in an array.
-     */
-    public String[] getHikesNames() {
-        return HIKES.getHikesNames();
     }
 
     /**
@@ -65,15 +59,15 @@ public class HikesFrame extends javax.swing.JFrame {
 
         titleLabel.setText("<html><h1>Choose a hike from below by clicking the button to the right.</h1></html>");
 
-        hikeTwoLabel.setText(getHikesNames()[1]);
+        hikeTwoLabel.setText(this.hikesNames[1]);
 
-        hikeThreeLabel.setText(getHikesNames()[2]);
+        hikeThreeLabel.setText(this.hikesNames[2]);
 
-        hikeFourLabel.setText(getHikesNames()[3]);
+        hikeFourLabel.setText(this.hikesNames[3]);
 
-        hikeOneLabel.setText(getHikesNames()[0]);
+        hikeOneLabel.setText(this.hikesNames[0]);
 
-        hikeFiveLabel.setText(getHikesNames()[4]);
+        hikeFiveLabel.setText(this.hikesNames[4]);
 
         hikeOneButton.setText("Select");
         hikeOneButton.addActionListener(new java.awt.event.ActionListener() {
@@ -198,7 +192,7 @@ public class HikesFrame extends javax.swing.JFrame {
      * @param evt The parameter passed in when the action is performed.
      */
     private void hikeOneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeOneButtonActionPerformed
-        showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[0]));
+        showHikeInfoFrame(HIKES.getChosenHikeInfo(this.hikesNames[0]));
     }//GEN-LAST:event_hikeOneButtonActionPerformed
 
     /**
@@ -206,7 +200,7 @@ public class HikesFrame extends javax.swing.JFrame {
      * @param evt The parameter passed in when the action is performed.
      */
     private void hikeTwoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeTwoButtonActionPerformed
-        showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[1]));
+        showHikeInfoFrame(HIKES.getChosenHikeInfo(this.hikesNames[1]));
     }//GEN-LAST:event_hikeTwoButtonActionPerformed
 
     /**
@@ -214,7 +208,7 @@ public class HikesFrame extends javax.swing.JFrame {
      * @param evt The parameter passed in when the action is performed.
      */
     private void hikeThreeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeThreeButtonActionPerformed
-        showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[2]));
+        showHikeInfoFrame(HIKES.getChosenHikeInfo(this.hikesNames[2]));
     }//GEN-LAST:event_hikeThreeButtonActionPerformed
 
     /**
@@ -222,7 +216,7 @@ public class HikesFrame extends javax.swing.JFrame {
      * @param evt The parameter passed in when the action is performed.
      */
     private void hikeFourButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeFourButtonActionPerformed
-        showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[3]));
+        showHikeInfoFrame(HIKES.getChosenHikeInfo(this.hikesNames[3]));
     }//GEN-LAST:event_hikeFourButtonActionPerformed
 
     /**
@@ -230,7 +224,7 @@ public class HikesFrame extends javax.swing.JFrame {
      * @param evt The parameter passed in when the action is performed.
      */
     private void hikeFiveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeFiveButtonActionPerformed
-        showHikeInfoFrame(HIKES.getChosenHikeInfo(getHikesNames()[4]));
+        showHikeInfoFrame(HIKES.getChosenHikeInfo(this.hikesNames[4]));
     }//GEN-LAST:event_hikeFiveButtonActionPerformed
 
     /**

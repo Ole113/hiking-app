@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.Arrays;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,7 +63,7 @@ public class HikesInfo {
 
             JSONArray hikeLocationArray = hikeResultArray.getJSONObject(i).getJSONArray("locations");
 
-            for(int j = 0; i < hikeLocationArray.length(); i++) {
+            for (int j = 0; i < hikeLocationArray.length(); i++) {
                 JSONObject displayLatLng = new JSONObject(hikeLocationArray.getJSONObject(j).getString("displayLatLng"));
                 hikeLatLng[0] = Double.parseDouble(displayLatLng.getString("lat"));
                 hikeLatLng[1] = Double.parseDouble(displayLatLng.getString("lng"));
@@ -95,25 +96,40 @@ public class HikesInfo {
     }
     
     /**
+     * Finds the first null index in a specified array.
+     * @param array The array to search.
+     * @return The null index.
+     */
+    private int getArrayNullIndex(String[] array) {
+        for(int i = 0; i < array.length; i++) {
+            if(array[i] == null) return i;
+        }
+        return -1;
+    }
+    
+    /**
      * Gets the closest five hikes that are returned by the hike API result.
      * @return A String array of the five hikes.
      */
-    public String[] getHikesNames() {
-        String[] hikesNames = new String[5];
-        
-        try {
-            JSONObject hikeApiResult = new JSONObject(getHikeInfo());
-            JSONArray hikesArray = hikeApiResult.getJSONArray("trails");
-            
-            for (int i = 0; i < hikesArray.length(); i++) {
-                String hikeName = hikesArray.getJSONObject(i).getString("name");
-                hikesNames[i] = hikeName;
+    public String[] getHikesNames(String[] hikesNames) {
+        //Recursion base case, will only work if the last element in hikesNames is not null.
+        if(hikesNames[4] != null) {
+            return hikesNames;
+        } else {
+            String[] updatedHikesNames = hikesNames;
+            try {
+                //Gets the information of the next hike's name by determining which indexes have been filled.
+                JSONObject hikeApiResult = new JSONObject(getHikeInfo());
+                JSONArray hikesArray = hikeApiResult.getJSONArray("trails");
+
+                String hikeName = hikesArray.getJSONObject(getArrayNullIndex(hikesNames)).getString("name");
+                updatedHikesNames[getArrayNullIndex(hikesNames)] = hikeName;
+
+                return getHikesNames(updatedHikesNames);
+            } catch(JSONException e) {
+                System.out.println("A JSONException has occured in getHikesNames(): " + e);
+                return hikesNames;
             }
-            
-            return hikesNames;
-        } catch(JSONException e) {
-            System.out.println("A JSONException has occured in getHikesNames()." + e);
-            return hikesNames;
         }
     }
     

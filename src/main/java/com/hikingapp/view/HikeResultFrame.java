@@ -19,9 +19,7 @@ public class HikeResultFrame extends javax.swing.JFrame {
     private String hikeName;
     private String hikeTimeString;
     
-    /**
-     * Creates new form HikeResultFrame and instantiates the instance variables.
-     */
+
     public HikeResultFrame(int hikeTimeSeconds, String hikeTimeString, String hikeImageURL, String hikeLength, String hikeAscent, String hikeDescent, String hikeName) {
         this.hikeTimeSeconds = hikeTimeSeconds;
         this.hikeTimeString = hikeTimeString;
