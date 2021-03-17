@@ -21,7 +21,7 @@ public class HikesFrame extends javax.swing.JFrame {
 
     private final HikesInfo HIKES;
     private HikeInfoFrame hikeInfoFrame;
-    private String[] hikesNames;
+    private final String[] hikesNames;
     
     /**
      * Initializes the hikes and the form components.

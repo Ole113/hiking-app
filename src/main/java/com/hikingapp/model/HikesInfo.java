@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Arrays;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,6 +19,8 @@ public class HikesInfo {
     private final String POSTAL_CODE;
     private final String CITY;
     private final String STATE;
+    private JSONObject hikeApiResult;
+    private JSONArray hikesArray;
     
     /**
      * Sets the instance variables with the user's input.
@@ -28,11 +29,13 @@ public class HikesInfo {
      * @param city The city the user input.
      * @param state The state the user input.
      */
-    public HikesInfo(String address, String postalCode, String city, String state) {
+    public HikesInfo(String address, String postalCode, String city, String state) throws JSONException {
         this.ADDRESS = address;
         this.POSTAL_CODE = postalCode;
         this.CITY = city;
         this.STATE = state;
+        this.hikeApiResult = new JSONObject(getHikeInfo());
+        this.hikesArray = hikeApiResult.getJSONArray("trails");
     }
 
     /**
@@ -41,8 +44,9 @@ public class HikesInfo {
      * @throws JSONException The getHikePosition() method throws this exception.
      */
     public String getHikeInfo() throws JSONException {
+        double[] hikePosition = getHikePosition();
         String apiKey = "200955643-5409210a90c1c5739821d1efae87d2bb";
-        String hikeInfo = getApiInfo("https://www.hikingproject.com/data/get-trails?lat=" + getHikePosition()[0] + "&lon=" + getHikePosition()[1] + "&maxResults=5&key=" + apiKey);
+        String hikeInfo = getApiInfo("https://www.hikingproject.com/data/get-trails?lat=" + hikePosition[0] + "&lon=" + hikePosition[1] + "&maxResults=5&key=" + apiKey);
         return hikeInfo;
     }
     
@@ -109,6 +113,7 @@ public class HikesInfo {
     
     /**
      * Gets the closest five hikes that are returned by the hike API result.
+     * @param hikesNames The parameter that the hike names will recursively be added to.
      * @return A String array of the five hikes.
      */
     public String[] getHikesNames(String[] hikesNames) {
@@ -118,13 +123,9 @@ public class HikesInfo {
         } else {
             String[] updatedHikesNames = hikesNames;
             try {
-                //Gets the information of the next hike's name by determining which indexes have been filled.
-                JSONObject hikeApiResult = new JSONObject(getHikeInfo());
-                JSONArray hikesArray = hikeApiResult.getJSONArray("trails");
-
-                String hikeName = hikesArray.getJSONObject(getArrayNullIndex(hikesNames)).getString("name");
+                //Gets the information of the next hike's name by determining which indexes have been filled using the helper method getArrayNullIndex.
+                String hikeName = this.hikesArray.getJSONObject(getArrayNullIndex(hikesNames)).getString("name");
                 updatedHikesNames[getArrayNullIndex(hikesNames)] = hikeName;
-
                 return getHikesNames(updatedHikesNames);
             } catch(JSONException e) {
                 System.out.println("A JSONException has occured in getHikesNames(): " + e);
@@ -142,11 +143,8 @@ public class HikesInfo {
         HashMap<String, String> hikeInfo = new HashMap<>();
 
         try {
-            JSONObject hikeApiResult = new JSONObject(getHikeInfo());
-            JSONArray hikesArray = hikeApiResult.getJSONArray("trails");
-            
-            for (int i = 0; i < hikesArray.length(); i++) {
-                JSONObject hike = hikesArray.getJSONObject(i);
+            for (int i = 0; i < this.hikesArray.length(); i++) {
+                JSONObject hike = this.hikesArray.getJSONObject(i);
                 if(hike.getString("name").equals(chosenHike)) {
                     hikeInfo.put("name", hike.getString("name"));
                     hikeInfo.put("summary", hike.getString("summary"));

@@ -7,19 +7,28 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
- *
+ * 
  */
 public class HikeResultFrame extends javax.swing.JFrame {
 
-    private int hikeTimeSeconds;
-    private String hikeImageURL;
-    private String hikeLength;
-    private String hikeAscent;
-    private String hikeDescent;
-    private String hikeName;
-    private String hikeTimeString;
+    private final int hikeTimeSeconds;
+    private final String hikeImageURL;
+    private final String hikeLength;
+    private final String hikeAscent;
+    private final String hikeDescent;
+    private final String hikeName;
+    private final String hikeTimeString;
     
-
+    /**
+     * 
+     * @param hikeTimeSeconds
+     * @param hikeTimeString
+     * @param hikeImageURL
+     * @param hikeLength
+     * @param hikeAscent
+     * @param hikeDescent
+     * @param hikeName 
+     */
     public HikeResultFrame(int hikeTimeSeconds, String hikeTimeString, String hikeImageURL, String hikeLength, String hikeAscent, String hikeDescent, String hikeName) {
         this.hikeTimeSeconds = hikeTimeSeconds;
         this.hikeTimeString = hikeTimeString;
@@ -31,6 +40,10 @@ public class HikeResultFrame extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     * The average speed of the hike.
+     * @return Hike Speed.
+     */
     private String getHikeSpeed() {
         return "Average speed: " + Double.toString(Double.parseDouble(this.hikeLength) / this.hikeTimeSeconds) + " MPH";
     }
@@ -45,6 +58,14 @@ public class HikeResultFrame extends javax.swing.JFrame {
     
     private String getHikeName() {
         return this.hikeName;
+    }
+    
+    private String getHikeAscent() {
+        return "Hike Ascent: " + this.hikeAscent;
+    }
+    
+    private String getHikeDescent() {
+        return "Hike Descent: " + this.hikeDescent;
     }
     
     private String getHikeImage() {
@@ -72,6 +93,8 @@ public class HikeResultFrame extends javax.swing.JFrame {
         hikeDistance = new javax.swing.JLabel();
         hikeSpeed = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
+        hikeAscentResult = new javax.swing.JLabel();
+        hikeDescentResult = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +108,10 @@ public class HikeResultFrame extends javax.swing.JFrame {
 
         name.setText(getHikeName());
 
+        hikeAscentResult.setText(getHikeAscent());
+
+        hikeDescentResult.setText(getHikeDescent());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,7 +123,9 @@ public class HikeResultFrame extends javax.swing.JFrame {
                     .addComponent(name)
                     .addComponent(image)
                     .addComponent(hikeDistance)
-                    .addComponent(hikeSpeed))
+                    .addComponent(hikeSpeed)
+                    .addComponent(hikeAscentResult)
+                    .addComponent(hikeDescentResult))
                 .addContainerGap(310, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,13 +141,19 @@ public class HikeResultFrame extends javax.swing.JFrame {
                 .addComponent(hikeDistance)
                 .addGap(18, 18, 18)
                 .addComponent(hikeSpeed)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hikeAscentResult)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hikeDescentResult)
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel hikeAscentResult;
+    private javax.swing.JLabel hikeDescentResult;
     private javax.swing.JLabel hikeDistance;
     private javax.swing.JLabel hikeSpeed;
     private javax.swing.JLabel image;

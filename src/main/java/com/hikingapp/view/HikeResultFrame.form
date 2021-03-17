@@ -31,6 +31,8 @@
                   <Component id="image" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="hikeDistance" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="hikeSpeed" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="hikeAscentResult" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="hikeDescentResult" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="310" max="32767" attributes="0"/>
           </Group>
@@ -49,7 +51,11 @@
               <Component id="hikeDistance" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="hikeSpeed" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="157" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="hikeAscentResult" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="hikeDescentResult" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="107" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -87,6 +93,20 @@
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="getHikeName()" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="hikeAscentResult">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="getHikeAscent()" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="hikeDescentResult">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="getHikeDescent()" type="code"/>
         </Property>
       </Properties>
     </Component>
