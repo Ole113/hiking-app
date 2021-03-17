@@ -401,11 +401,13 @@ public class HikeInfoFrame extends javax.swing.JFrame {
      * @param evt The parameter that is passed in by the action being performed.
      */
     private void hikeStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hikeStopActionPerformed
-        this.timer.stop();
-        
-        this.resultFrame = new HikeResultFrame(this.hikeTimerSeconds, getHikeTime(), this.HIKE_INFO.get("imgUrl"), this.HIKE_INFO.get("length"), this.HIKE_INFO.get("ascent"), this.HIKE_INFO.get("descent"), getHikeName());
-        this.resultFrame.setVisible(true);
-        this.setVisible(false);
+        if(!(this.timer == null)) {
+            this.timer.stop();
+
+            this.resultFrame = new HikeResultFrame(this.hikeTimerSeconds, getHikeTime(), this.HIKE_INFO.get("imgUrl"), this.HIKE_INFO.get("length"), this.HIKE_INFO.get("ascent"), this.HIKE_INFO.get("descent"), getHikeName());
+            this.resultFrame.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_hikeStopActionPerformed
 
     /**

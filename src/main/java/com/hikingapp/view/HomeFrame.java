@@ -165,8 +165,7 @@ public class HomeFrame extends JFrame {
      */
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         try {
-            //hikesInfo = new HikesInfo(addressTextField.getText(), postalCodeTextField.getText(), cityTextField.getText(), stateTextField.getText());
-            hikesInfo = new HikesInfo("8879 Summer Crest Drive", "84093", "Sandy", "Utah");
+            hikesInfo = new HikesInfo(addressTextField.getText(), postalCodeTextField.getText(), cityTextField.getText(), stateTextField.getText());
         } catch (JSONException ex) {
             Logger.getLogger(HomeFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

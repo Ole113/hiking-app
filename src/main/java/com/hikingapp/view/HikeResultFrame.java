@@ -11,32 +11,32 @@ import javax.swing.ImageIcon;
  */
 public class HikeResultFrame extends javax.swing.JFrame {
 
-    private final int hikeTimeSeconds;
-    private final String hikeImageURL;
-    private final String hikeLength;
-    private final String hikeAscent;
-    private final String hikeDescent;
-    private final String hikeName;
-    private final String hikeTimeString;
+    private final int HIKE_TIME_SECONDS;
+    private final String HIKE_IMAGE_URL;
+    private final String HIKE_LENGTH;
+    private final String HIKE_ASCENT;
+    private final String HIKE_DESCENT;
+    private final String HIKE_NAME;
+    private final String HIKE_TIME_STRING;
     
     /**
      * Initializes the values that will be displayed and initializes the form elements.
-     * @param hikeTimeSeconds The time it took to complete the hike.
-     * @param hikeTimeString The string that has the time, in the format hours:minutes:seconds
-     * @param hikeImageURL The URL of the hike's image.
-     * @param hikeLength The length of the hike.
-     * @param hikeAscent The ascent of the hike.
-     * @param hikeDescent The descent of the hike.
-     * @param hikeName The name of the hike.
+     * @param HIKE_TIME_SECONDS The time it took to complete the hike.
+     * @param HIKE_TIME_STRING The string that has the time, in the format hours:minutes:seconds
+     * @param HIKE_IMAGE_URL The URL of the hike's image.
+     * @param HIKE_LENGTH The length of the hike.
+     * @param HIKE_ASCENT The ascent of the hike.
+     * @param HIKE_DESCENT The descent of the hike.
+     * @param HIKE_NAME The name of the hike.
      */
-    public HikeResultFrame(int hikeTimeSeconds, String hikeTimeString, String hikeImageURL, String hikeLength, String hikeAscent, String hikeDescent, String hikeName) {
-        this.hikeTimeSeconds = hikeTimeSeconds;
-        this.hikeTimeString = hikeTimeString;
-        this.hikeImageURL = hikeImageURL;
-        this.hikeLength = hikeLength;
-        this.hikeAscent = hikeAscent;
-        this.hikeDescent = hikeDescent;
-        this.hikeName = hikeName;
+    public HikeResultFrame(int HIKE_TIME_SECONDS, String HIKE_TIME_STRING, String HIKE_IMAGE_URL, String HIKE_LENGTH, String HIKE_ASCENT, String HIKE_DESCENT, String HIKE_NAME) {
+        this.HIKE_TIME_SECONDS = HIKE_TIME_SECONDS;
+        this.HIKE_TIME_STRING = HIKE_TIME_STRING;
+        this.HIKE_IMAGE_URL = HIKE_IMAGE_URL;
+        this.HIKE_LENGTH = HIKE_LENGTH;
+        this.HIKE_ASCENT = HIKE_ASCENT;
+        this.HIKE_DESCENT = HIKE_DESCENT;
+        this.HIKE_NAME = HIKE_NAME;
         initComponents();
     }
 
@@ -45,7 +45,7 @@ public class HikeResultFrame extends javax.swing.JFrame {
      * @return Hike Speed.
      */
     private String getHikeSpeed() {
-        return "Average speed: " + Double.toString(Double.parseDouble(this.hikeLength) / this.hikeTimeSeconds) + " MPH";
+        return "Average speed: " + Double.toString(Double.parseDouble(this.HIKE_LENGTH) / this.HIKE_TIME_SECONDS) + " MPH";
     }
     
     /**
@@ -53,7 +53,7 @@ public class HikeResultFrame extends javax.swing.JFrame {
      * @return String that has the distance hiked.
      */
     private String getHikeDistance() {
-        return "Total distance hiked: " + this.hikeLength + " miles";
+        return "Total distance hiked: " + this.HIKE_LENGTH + " miles";
     }
     
     /**
@@ -61,7 +61,7 @@ public class HikeResultFrame extends javax.swing.JFrame {
      * @return Total hike time taken.
      */
     private String getHikeTime() {
-        return "Total hike time: " + this.hikeTimeString;
+        return "Total hike time: " + this.HIKE_TIME_STRING;
     }
     
     /**
@@ -69,7 +69,7 @@ public class HikeResultFrame extends javax.swing.JFrame {
      * @return Hike Name.
      */
     private String getHikeName() {
-        return this.hikeName;
+        return this.HIKE_NAME;
     }
     
     /**
@@ -77,7 +77,7 @@ public class HikeResultFrame extends javax.swing.JFrame {
      * @return Hike Ascent.
      */
     private String getHikeAscent() {
-        return "Hike Ascent: " + this.hikeAscent;
+        return "Hike Ascent: " + this.HIKE_ASCENT;
     }
     
     /**
@@ -85,7 +85,7 @@ public class HikeResultFrame extends javax.swing.JFrame {
      * @return Hike Descent.
      */
     private String getHikeDescent() {
-        return "Hike Descent: " + this.hikeDescent;
+        return "Hike Descent: " + this.HIKE_DESCENT;
     }
     
     /**
@@ -94,7 +94,7 @@ public class HikeResultFrame extends javax.swing.JFrame {
      */
     private String getHikeImage() {
         try {
-            URL url = new URL(hikeImageURL);
+            URL url = new URL(HIKE_IMAGE_URL);
             Image imageObject = ImageIO.read(url);
             image.setIcon(new ImageIcon(imageObject));
         } catch(IOException error) {
