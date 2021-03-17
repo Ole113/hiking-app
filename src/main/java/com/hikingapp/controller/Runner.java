@@ -1,8 +1,9 @@
 package com.hikingapp.controller;
 
 import com.hikingapp.view.HomeFrame;
+
 /**
- *
+ * Runs the Hiking App.
  */
 public class Runner {
     public static void main(String[] args) {

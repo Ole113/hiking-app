@@ -8,6 +8,9 @@ package com.hikingapp.view;
 import javax.swing.*;
 
 import com.hikingapp.model.HikesInfo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.JSONException;
 
 /**
  * Gets the address that the user wants to find hikes near.
@@ -161,8 +164,12 @@ public class HomeFrame extends JFrame {
      * @param evt The parameter that is passed in automatically when the button is clicked.
      */
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        //hikesInfo = new HikesInfo(addressTextField.getText(), postalCodeTextField.getText(), cityTextField.getText(), stateTextField.getText());
-        hikesInfo = new HikesInfo("8879 Summer Crest Drive", "84093", "Sandy", "Utah");
+        try {
+            //hikesInfo = new HikesInfo(addressTextField.getText(), postalCodeTextField.getText(), cityTextField.getText(), stateTextField.getText());
+            hikesInfo = new HikesInfo("8879 Summer Crest Drive", "84093", "Sandy", "Utah");
+        } catch (JSONException ex) {
+            Logger.getLogger(HomeFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         hikesFrame = new HikesFrame(hikesInfo);
         hikesFrame.setVisible(true);
         this.setVisible(false);

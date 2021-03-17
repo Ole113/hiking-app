@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
- * 
+ * Shows the result of the timed hike.
  */
 public class HikeResultFrame extends javax.swing.JFrame {
 
@@ -20,14 +20,14 @@ public class HikeResultFrame extends javax.swing.JFrame {
     private final String hikeTimeString;
     
     /**
-     * 
-     * @param hikeTimeSeconds
-     * @param hikeTimeString
-     * @param hikeImageURL
-     * @param hikeLength
-     * @param hikeAscent
-     * @param hikeDescent
-     * @param hikeName 
+     * Initializes the values that will be displayed and initializes the form elements.
+     * @param hikeTimeSeconds The time it took to complete the hike.
+     * @param hikeTimeString The string that has the time, in the format hours:minutes:seconds
+     * @param hikeImageURL The URL of the hike's image.
+     * @param hikeLength The length of the hike.
+     * @param hikeAscent The ascent of the hike.
+     * @param hikeDescent The descent of the hike.
+     * @param hikeName The name of the hike.
      */
     public HikeResultFrame(int hikeTimeSeconds, String hikeTimeString, String hikeImageURL, String hikeLength, String hikeAscent, String hikeDescent, String hikeName) {
         this.hikeTimeSeconds = hikeTimeSeconds;
@@ -48,26 +48,50 @@ public class HikeResultFrame extends javax.swing.JFrame {
         return "Average speed: " + Double.toString(Double.parseDouble(this.hikeLength) / this.hikeTimeSeconds) + " MPH";
     }
     
+    /**
+     * The distance that is hiked.
+     * @return String that has the distance hiked.
+     */
     private String getHikeDistance() {
         return "Total distance hiked: " + this.hikeLength + " miles";
     }
     
+    /**
+     * The time it took to do the hike.
+     * @return Total hike time taken.
+     */
     private String getHikeTime() {
         return "Total hike time: " + this.hikeTimeString;
     }
     
+    /**
+     * Gets the name of the hike.
+     * @return Hike Name.
+     */
     private String getHikeName() {
         return this.hikeName;
     }
     
+    /**
+     * The ascent of the hike.
+     * @return Hike Ascent.
+     */
     private String getHikeAscent() {
         return "Hike Ascent: " + this.hikeAscent;
     }
     
+    /**
+     * The descent of the hike.
+     * @return Hike Descent.
+     */
     private String getHikeDescent() {
         return "Hike Descent: " + this.hikeDescent;
     }
     
+    /**
+     * Sets the icon on the image variable.
+     * @return Empty string but sets the hike image.
+     */
     private String getHikeImage() {
         try {
             URL url = new URL(hikeImageURL);
