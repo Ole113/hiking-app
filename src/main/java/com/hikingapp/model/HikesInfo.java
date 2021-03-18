@@ -132,7 +132,7 @@ public class HikesInfo {
                 return hikesNames;
             }
         }
-    }
+    }   
     
     /**
      * Puts all the hike information into a HashMap<String, String> so all the hike information can easily be accessed by other classes.
